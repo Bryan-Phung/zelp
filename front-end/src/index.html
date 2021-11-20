@@ -6,8 +6,38 @@
   <title>Zelp</title>
   <link rel="stylesheet" href="style.css">
   <script type="module" src="app.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""></script>
+  <style>
+      #map {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        top: 0;
+        z-index: 0;
+      }
+  </style>
 </head>
 <body>
   <h1>Welcome to Zelp!</h1>
+  <div id="map"></div>
+  <script type= "text/javascript">
+    var mymap = L.map('map').setView(new L.LatLng(33.6405, -117.8443), 14);
+    // mymap = L.map.setMaxBounds(new L.LatLng(34, -119));
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYXNobGV5eXVuZyIsImEiOiJja3c4Zms5b3VmbmdpMm9wZ3RweXVobXdrIn0.Z0suqthB4PY9EuGvYQHv6w', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: 'pk.eyJ1IjoiYXNobGV5eXVuZyIsImEiOiJja3c4Zms5b3VmbmdpMm9wZ3RweXVobXdrIn0.Z0suqthB4PY9EuGvYQHv6w'
+}).addTo(mymap);
+  </script>
 </body>
 </html>
