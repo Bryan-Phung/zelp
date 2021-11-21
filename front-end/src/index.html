@@ -47,6 +47,11 @@ function addMarker(e){
     var newMarker = new L.marker(e.latlng).addTo(mymap);
     newMarker.on('click', function(e) {
       console.log("marker clicked", e);
+
+      L.popup({ elevation: 260.0 })
+       .setLatLng([e.latlng.lat + 0.003, e.latlng.lng])
+       .setContent("Transamerica Pyramid")
+       .addTo(mymap);
     });
 }
   </script>
