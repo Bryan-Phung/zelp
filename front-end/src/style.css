@@ -9,7 +9,7 @@
 body{
  height: 100vh;
  width: 100%;
- background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
+ background: linear-gradient(115deg, #a8a2ff 10%, #9f01ea 90%);
 }
 .show-btn{
  background: #fff;
@@ -134,12 +134,13 @@ body {
 }
  
 .title {
- flex: 1;
+  display: flex;
+  justify-content: flex-end;
 }
  
 .header {
  display: flex;
- justify-content: flex-end;
+ justify-content: space-around;
  align-items: center;
 }
  
@@ -265,8 +266,13 @@ body {
 
 #map {
   position: absolute;
-  top: 150px;
-  right: 0;
-  left: 0;
+  top: 200px;
+  right: 50;
+  left: 50;
   bottom: 0;
+}
+
+.logo{
+  display: flex;
+  height: 70px;
 }
