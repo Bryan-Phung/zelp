@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,103 +9,19 @@
   <script type="module" src="app.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-    crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-      crossorigin=""></script>
-  <style>
-      #map {
-        position: absolute;
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        top: 0;
-        z-index: 0;
-      }
-  </style>
+    crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
 </head>
- 
+
 <body>
-  <h1>Welcome to Zelp!</h1>
-  <div id="map"></div>
-  <script type= "text/javascript">
+  <header class="header">
+    <h1 class="title">Zelp</h1>
 
+    <button class="logIn" id="loginbutton">Log In</button>
 
-    var mymap = L.map('map').setView(new L.LatLng(33.6405, -117.8443), 14);
-    // mymap = L.map.setMaxBounds(new L.LatLng(34, -119));
-    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYXNobGV5eXVuZyIsImEiOiJja3c4Zms5b3VmbmdpMm9wZ3RweXVobXdrIn0.Z0suqthB4PY9EuGvYQHv6w', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 18,
-    minZoom: 12,
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1,
-    accessToken: 'pk.eyJ1IjoiYXNobGV5eXVuZyIsImEiOiJja3c4Zms5b3VmbmdpMm9wZ3RweXVobXdrIn0.Z0suqthB4PY9EuGvYQHv6w'
-}).addTo(mymap);
-
-  var RestIcon = L.Icon.extend(
-    { options:{
-          // iconUrl: 'restroom.jpg',
-
-          iconSize:     [40, 40], 
-          iconAnchor:   [0, 0],
-          popupAnchor:  [0, 0]
-      }});
-
-    var rest_icon = new RestIcon({
-      iconUrl: 'https://www.pngmart.com/files/17/Vector-Bathroom-PNG-Transparent-Image.png'
-    })
-
-    var MicroIcon = L.Icon.extend(
-    { options:{
-          // iconUrl: 'microwave.jpg',
-
-          iconSize:     [50, 40], 
-          iconAnchor:   [0, 0],
-          popupAnchor:  [0, 0]
-      }});
-
-    var micro_icon = new MicroIcon({
-      iconUrl: 'https://www.pinclipart.com/picdir/big/526-5260001_microwave-symbol-vector-image-microwave-clip-art-png.png'
-    })
-
-    var WaterIcon = L.Icon.extend(
-    { options:{
-          // iconUrl: 'waterbottle.jpg',
-
-          iconSize:     [40, 60], 
-          iconAnchor:   [0, 0],
-          popupAnchor:  [0, 0]
-      }});
-
-    var water_icon = new WaterIcon({
-      iconUrl: 'https://cliparting.com/wp-content/uploads/2017/02/Water-bottle-clip-art-tumundografico-6.png'
-    })
-
-  newMarkerGroup = new L.LayerGroup();
-  mymap.on('click', addMarker);
-
-function addMarker(e){
-    // Add marker to map at click location; add popup window
-    var opt = prompt("what: ");
-    var newMarker = new L.marker(e.latlng, {icon: rest_icon}).addTo(mymap); // ?? option?
-    newMarker.on('click', function(e) {
-      console.log("marker clicked", e);
-      var marker = prompt("location: ");
-      L.popup({ elevation: 260.0 })
-       .setLatLng([e.latlng.lat + 0.001, e.latlng.lng + 0.002])
-       .setContent(marker)
-       .addTo(mymap);
-    });
-}
-  </script>
- <header class="header">
-   <h1 class="title">Zelp</h1>
- 
-   <button class="logIn" id="loginbutton">Log In</button>
- 
-   <!-- <!DOCTYPE html>
+    <!-- <!DOCTYPE html>
 <html lang="en" dir="ltr">
  <head>
    <meta charset="utf-8">
@@ -142,36 +59,115 @@ Not a member? <a href="#">Sign up now!</a></div>
 </div>
 </body>
 </html> -->
- 
-   <div class="form-popup" id="myForm">
-     <form action="/action_page.php" class="form-container">
-       <h1>Login</h1>
-  
-       <label for="email"><b>Email</b></label>
-       <input type="text" placeholder="Enter Email" name="email" required>
-  
-       <label for="psw"><b>Password</b></label>
-       <input type="password" placeholder="Enter Password" name="psw" required>
-  
-       <button type="submit" class="btn">Login</button>
-       <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-     </form>
-   </div>
-   <button class="signUp">Sign Up</button>
-</header>
- 
-<div class="topnav">
- <a class="active" href="#All">all</a>
- <a href="#bathrooms">Bathrooms</a>
- <a href="#microwaves">Microwaves</a>
- <a href="#Water Stations">Water Stations</a>
-</div>
- <div class="map">
- 
-</div>
- 
- <div class="addButton">
-   <button class="addButton">+</button>
-</div>
+
+    <div class="form-popup" id="myForm">
+      <form action="/action_page.php" class="form-container">
+        <h1>Login</h1>
+
+        <label for="email"><b>Email</b></label>
+        <input type="text" placeholder="Enter Email" name="email" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+
+        <button type="submit" class="btn">Login</button>
+        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+      </form>
+    </div>
+    <button class="signUp">Sign Up</button>
+  </header>
+
+  <div class="topnav">
+    <a class="active" href="#All">all</a>
+    <a href="#bathrooms">Bathrooms</a>
+    <a href="#microwaves">Microwaves</a>
+    <a href="#Water Stations">Water Stations</a>
+  </div>
+  <div class="map" id="map">
+
+  </div>
+
+  <div class="addButton">
+    <button class="addButton">+</button>
+  </div>
+
+  <script type="text/javascript">
+
+
+    var mymap = L.map('map').setView(new L.LatLng(33.6405, -117.8443), 14);
+    // mymap = L.map.setMaxBounds(new L.LatLng(34, -119));
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYXNobGV5eXVuZyIsImEiOiJja3c4Zms5b3VmbmdpMm9wZ3RweXVobXdrIn0.Z0suqthB4PY9EuGvYQHv6w', {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      maxZoom: 18,
+      minZoom: 12,
+      id: 'mapbox/streets-v11',
+      tileSize: 512,
+      zoomOffset: -1,
+      accessToken: 'pk.eyJ1IjoiYXNobGV5eXVuZyIsImEiOiJja3c4Zms5b3VmbmdpMm9wZ3RweXVobXdrIn0.Z0suqthB4PY9EuGvYQHv6w'
+    }).addTo(mymap);
+
+    var RestIcon = L.Icon.extend(
+      {
+        options: {
+          // iconUrl: 'restroom.jpg',
+
+          iconSize: [40, 40],
+          iconAnchor: [0, 0],
+          popupAnchor: [0, 0]
+        }
+      });
+
+    var rest_icon = new RestIcon({
+      iconUrl: 'https://www.pngmart.com/files/17/Vector-Bathroom-PNG-Transparent-Image.png'
+    })
+
+    var MicroIcon = L.Icon.extend(
+      {
+        options: {
+          // iconUrl: 'microwave.jpg',
+
+          iconSize: [50, 40],
+          iconAnchor: [0, 0],
+          popupAnchor: [0, 0]
+        }
+      });
+
+    var micro_icon = new MicroIcon({
+      iconUrl: 'https://www.pinclipart.com/picdir/big/526-5260001_microwave-symbol-vector-image-microwave-clip-art-png.png'
+    })
+
+    var WaterIcon = L.Icon.extend(
+      {
+        options: {
+          // iconUrl: 'waterbottle.jpg',
+
+          iconSize: [40, 60],
+          iconAnchor: [0, 0],
+          popupAnchor: [0, 0]
+        }
+      });
+
+    var water_icon = new WaterIcon({
+      iconUrl: 'https://cliparting.com/wp-content/uploads/2017/02/Water-bottle-clip-art-tumundografico-6.png'
+    })
+
+    newMarkerGroup = new L.LayerGroup();
+    mymap.on('click', addMarker);
+
+    function addMarker(e) {
+      // Add marker to map at click location; add popup window
+      var opt = prompt("what: ");
+      var newMarker = new L.marker(e.latlng, { icon: rest_icon }).addTo(mymap); // ?? option?
+      newMarker.on('click', function (e) {
+        console.log("marker clicked", e);
+        var marker = prompt("location: ");
+        L.popup({ elevation: 260.0 })
+          .setLatLng([e.latlng.lat + 0.001, e.latlng.lng + 0.002])
+          .setContent(marker)
+          .addTo(mymap);
+      });
+    }
+  </script>
 </body>
+
 </html>
