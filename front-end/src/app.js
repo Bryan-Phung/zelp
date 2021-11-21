@@ -17,13 +17,13 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 
 var RestIcon = L.Icon.extend(
     {
-    options: {
-        // iconUrl: 'restroom.jpg',
+        options: {
+            // iconUrl: 'restroom.jpg',
 
-        iconSize: [40, 40],
-        iconAnchor: [0, 0],
-        popupAnchor: [0, 0]
-    }
+            iconSize: [40, 40],
+            iconAnchor: [0, 0],
+            popupAnchor: [0, 0]
+        }
     });
 
 var rest_icon = new RestIcon({
@@ -32,13 +32,13 @@ var rest_icon = new RestIcon({
 
 var MicroIcon = L.Icon.extend(
     {
-    options: {
-        // iconUrl: 'microwave.jpg',
+        options: {
+            // iconUrl: 'microwave.jpg',
 
-        iconSize: [50, 40],
-        iconAnchor: [0, 0],
-        popupAnchor: [0, 0]
-    }
+            iconSize: [50, 40],
+            iconAnchor: [0, 0],
+            popupAnchor: [0, 0]
+        }
     });
 
 var micro_icon = new MicroIcon({
@@ -47,66 +47,65 @@ var micro_icon = new MicroIcon({
 
 var WaterIcon = L.Icon.extend(
     {
-    options: {
-        // iconUrl: 'waterbottle.jpg',
+        options: {
+            // iconUrl: 'waterbottle.jpg',
 
-        iconSize: [40, 60],
-        iconAnchor: [0, 0],
-        popupAnchor: [0, 0]
-    }
+            iconSize: [40, 60],
+            iconAnchor: [0, 0],
+            popupAnchor: [0, 0]
+        }
     });
 
 var water_icon = new WaterIcon({
     iconUrl: 'https://cliparting.com/wp-content/uploads/2017/02/Water-bottle-clip-art-tumundografico-6.png'
 })
 
-newMarkerGroup = new L.LayerGroup();
 mymap.on('click', addMarker);
 
 var favDialog = document.getElementById('opt');
-    var selectEl = document.querySelector('select');
-    var confirmBtn = document.getElementById('confirmBtn');
+var selectEl = document.querySelector('select');
+var confirmBtn = document.getElementById('confirmBtn');
 
 selectEl.addEventListener('change', function onSelect(e) {
     confirmBtn.value = selectEl.value;
 
 });
-    // "Confirm" button of form triggers "close" on dialog because of [method="dialog"]
-favDialog.addEventListener('close', function onClose() 
-    {
+// "Confirm" button of form triggers "close" on dialog because of [method="dialog"]
+favDialog.addEventListener('close', function onClose() {
     //   outputBox.value = favDialog.returnValue + " button clicked - " + (new Date()).toString();
-        if (favDialog.returnValue == 'Restroom') {
-            var newMarker = new L.marker(latestLatLong, { icon: rest_icon }).addTo(mymap);
+    if (favDialog.returnValue == 'Restroom') {
+        var newMarker = new L.marker(latestLatLong, { icon: rest_icon }).addTo(mymap);
+    }
+    else if (favDialog.returnValue == 'Microwave') {
+        var newMarker = new L.marker(latestLatLong, { icon: micro_icon }).addTo(mymap);
+    }
+    else {
+        var newMarker = new L.marker(latestLatLong, { icon: water_icon }).addTo(mymap);
+    }
+    var temp = {
+        name: favDialog.returnValue,
+        lat: latestLatLong,
+        newMarker
+    };
+    // console.log(temp.name); 
+    markers.push(temp);
+    newMarker.on('click', function (e) {
+        console.log("marker clicked", e);
+        if (!newMarker.popupText) {
+            var marker = prompt("location: ");
+            newMarker.popupText = marker;
         }
-        else if (favDialog.returnValue == 'Microwave') {
-            var newMarker = new L.marker(latestLatLong, { icon: micro_icon }).addTo(mymap);
-        }
-        else {
-            var newMarker = new L.marker(latestLatLong, { icon: water_icon }).addTo(mymap);
-        }
-        var temp = {name: favDialog.returnValue,
-                    lat: latestLatLong,
-                    newMarker
-                    };
-        // console.log(temp.name); 
-        markers.push(temp);                
-        newMarker.on('click', function (e) {
-            console.log("marker clicked", e);
-            if (!newMarker.popupText) {
-                var marker = prompt("location: ");
-                newMarker.popupText = marker;
-            }
-            L.popup({ elevation: 260.0 })
-                .setLatLng([e.latlng.lat, e.latlng.lng + 0.001])
-                .setContent(newMarker.popupText)
-                .addTo(mymap);
-        });
+        L.popup({ elevation: 260.0 })
+            .setLatLng([e.latlng.lat, e.latlng.lng + 0.001])
+            .setContent(newMarker.popupText)
+            .addTo(mymap);
     });
+});
 function addMarker(e) {
     latestLatLong = e.latlng;
     // Add marker to map at click location; add popup window
     // var opt = prompt("what: ");
-    
+
 
     // "Update details" button opens the <dialog> modally
     // updateButton.addEventListener('click', function onOpen() {
@@ -117,12 +116,12 @@ function addMarker(e) {
     }
     // });
     // "Favorite animal" input sets the value of the submit button
-    
+
 }
 function openForm() {
     document.getElementById("myForm").style.display = "block";
 }
-    function closeForm() {
+function closeForm() {
     document.getElementById("myForm").style.display = "none";
 };
 
@@ -130,33 +129,28 @@ var all = document.getElementById("all-filter");
 var bathroom = document.getElementById("bathroom-filter");
 var micro = document.getElementById("microwave-filter");
 var water = document.getElementById("water-filter");
-all.addEventListener("click", function()
-{
+all.addEventListener("click", function () {
     filter('all');
 });
-bathroom.addEventListener("click", function()
-{
+bathroom.addEventListener("click", function () {
     filter('Restroom');
 });
-micro.addEventListener("click", function()
-{
+micro.addEventListener("click", function () {
     filter('Microwave');
 });
-water.addEventListener("click", function()
-{
+water.addEventListener("click", function () {
     filter('Water Station');
 });
-function filter(filtervalue)
-{
-    markers.forEach(function(m) {
+function filter(filtervalue) {
+    markers.forEach(function (m) {
         mymap.removeLayer(m.newMarker);
     });
-    const filteredMarkers = filtervalue == 'all' ? markers : markers.filter(function(m) {
+    const filteredMarkers = filtervalue == 'all' ? markers : markers.filter(function (m) {
         return m.name == filtervalue;
     })
     console.log(filtervalue);
     console.log(filteredMarkers);
-    filteredMarkers.forEach(function(m) {
+    filteredMarkers.forEach(function (m) {
         mymap.addLayer(m.newMarker);
     });
 };
