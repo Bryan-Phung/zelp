@@ -97,7 +97,7 @@ favDialog.addEventListener('close', function onClose()
                 newMarker.popupText = marker;
             }
             L.popup({ elevation: 260.0 })
-                .setLatLng([e.latlng.lat + 0.001, e.latlng.lng + 0.002])
+                .setLatLng([e.latlng.lat, e.latlng.lng + 0.001])
                 .setContent(newMarker.popupText)
                 .addTo(mymap);
         });

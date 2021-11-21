@@ -2,9 +2,10 @@
   "name": "zelp-ui",
   "version": "1.0.0",
   "description": "UI for the Zelp application",
-  "main": "index.js",
+  "source": "src/index.html",
   "scripts": {
-    "start": "parcel src/index.html",
+    "start": "parcel",
+    "build": "parcel build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
