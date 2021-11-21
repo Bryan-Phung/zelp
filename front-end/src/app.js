@@ -1,6 +1,8 @@
 // console.log('does this run in  IN JS')
 // console.log('does this run in  IN HTML')
 let latestLatLong = {};
+
+const markers = [];
 var mymap = L.map('map').setView(new L.LatLng(33.6405, -117.8443), 14);
 // mymap = L.map.setMaxBounds(new L.LatLng(34, -119));
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYXNobGV5eXVuZyIsImEiOiJja3c4Zms5b3VmbmdpMm9wZ3RweXVobXdrIn0.Z0suqthB4PY9EuGvYQHv6w', {
@@ -82,6 +84,12 @@ favDialog.addEventListener('close', function onClose()
         else {
             var newMarker = new L.marker(latestLatLong, { icon: water_icon }).addTo(mymap);
         }
+        var temp = {name: favDialog.returnValue,
+                    lat: latestLatLong,
+                    newMarker
+                    };
+        // console.log(temp.name); 
+        markers.push(temp);                
         newMarker.on('click', function (e) {
             console.log("marker clicked", e);
             if (!newMarker.popupText) {
@@ -116,4 +124,39 @@ function openForm() {
 }
     function closeForm() {
     document.getElementById("myForm").style.display = "none";
+};
+
+var all = document.getElementById("all-filter");
+var bathroom = document.getElementById("bathroom-filter");
+var micro = document.getElementById("microwave-filter");
+var water = document.getElementById("water-filter");
+all.addEventListener("click", function()
+{
+    filter('all');
+});
+bathroom.addEventListener("click", function()
+{
+    filter('Restroom');
+});
+micro.addEventListener("click", function()
+{
+    filter('Microwave');
+});
+water.addEventListener("click", function()
+{
+    filter('Water Station');
+});
+function filter(filtervalue)
+{
+    markers.forEach(function(m) {
+        mymap.removeLayer(m.newMarker);
+    });
+    const filteredMarkers = filtervalue == 'all' ? markers : markers.filter(function(m) {
+        return m.name == filtervalue;
+    })
+    console.log(filtervalue);
+    console.log(filteredMarkers);
+    filteredMarkers.forEach(function(m) {
+        mymap.addLayer(m.newMarker);
+    });
 };
