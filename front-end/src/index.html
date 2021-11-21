@@ -54,13 +54,39 @@
       iconUrl: 'https://www.pngmart.com/files/17/Vector-Bathroom-PNG-Transparent-Image.png'
     })
 
+    var MicroIcon = L.Icon.extend(
+    { options:{
+          // iconUrl: 'microwave.jpg',
+
+          iconSize:     [40, 40], 
+          iconAnchor:   [0, 0],
+          popupAnchor:  [0, 0]
+      }});
+
+    var micro_icon = new MicroIcon({
+      iconUrl: 'https://www.pinclipart.com/picdir/big/526-5260001_microwave-symbol-vector-image-microwave-clip-art-png.png'
+    })
+
+    var WaterIcon = L.Icon.extend(
+    { options:{
+          // iconUrl: 'waterbottle.jpg',
+
+          iconSize:     [40, 60], 
+          iconAnchor:   [0, 0],
+          popupAnchor:  [0, 0]
+      }});
+
+    var water_icon = new WaterIcon({
+      iconUrl: 'https://cliparting.com/wp-content/uploads/2017/02/Water-bottle-clip-art-tumundografico-6.png'
+    })
+
   newMarkerGroup = new L.LayerGroup();
   mymap.on('click', addMarker);
 
-
 function addMarker(e){
     // Add marker to map at click location; add popup window
-    var newMarker = new L.marker(e.latlng, {icon: rest_icon}).addTo(mymap);
+    var opt = prompt("what: ");
+    var newMarker = new L.marker(e.latlng, {icon: water_icon}).addTo(mymap); // ?? option?
     newMarker.on('click', function(e) {
       console.log("marker clicked", e);
       var marker = prompt("location: ");
