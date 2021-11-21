@@ -35,6 +35,7 @@
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYXNobGV5eXVuZyIsImEiOiJja3c4Zms5b3VmbmdpMm9wZ3RweXVobXdrIn0.Z0suqthB4PY9EuGvYQHv6w', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
+    minZoom: 12,
     id: 'mapbox/streets-v11',
     tileSize: 512,
     zoomOffset: -1,
@@ -58,7 +59,7 @@
     { options:{
           // iconUrl: 'microwave.jpg',
 
-          iconSize:     [40, 40], 
+          iconSize:     [50, 40], 
           iconAnchor:   [0, 0],
           popupAnchor:  [0, 0]
       }});
@@ -86,12 +87,12 @@
 function addMarker(e){
     // Add marker to map at click location; add popup window
     var opt = prompt("what: ");
-    var newMarker = new L.marker(e.latlng, {icon: water_icon}).addTo(mymap); // ?? option?
+    var newMarker = new L.marker(e.latlng, {icon: rest_icon}).addTo(mymap); // ?? option?
     newMarker.on('click', function(e) {
       console.log("marker clicked", e);
       var marker = prompt("location: ");
       L.popup({ elevation: 260.0 })
-       .setLatLng([e.latlng.lat + 0.003, e.latlng.lng])
+       .setLatLng([e.latlng.lat + 0.001, e.latlng.lng + 0.002])
        .setContent(marker)
        .addTo(mymap);
     });
