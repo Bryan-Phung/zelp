@@ -84,10 +84,13 @@ favDialog.addEventListener('close', function onClose()
         }
         newMarker.on('click', function (e) {
             console.log("marker clicked", e);
-            var marker = prompt("location: ");
+            if (!newMarker.popupText) {
+                var marker = prompt("location: ");
+                newMarker.popupText = marker;
+            }
             L.popup({ elevation: 260.0 })
                 .setLatLng([e.latlng.lat + 0.001, e.latlng.lng + 0.002])
-                .setContent(marker)
+                .setContent(newMarker.popupText)
                 .addTo(mymap);
         });
     });
