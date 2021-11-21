@@ -24,6 +24,7 @@
       }
   </style>
 </head>
+ 
 <body>
   <h1>Welcome to Zelp!</h1>
   <div id="map"></div>
@@ -98,5 +99,79 @@ function addMarker(e){
     });
 }
   </script>
+ <header class="header">
+   <h1 class="title">Zelp</h1>
+ 
+   <button class="logIn" id="loginbutton">Log In</button>
+ 
+   <!-- <!DOCTYPE html>
+<html lang="en" dir="ltr">
+ <head>
+   <meta charset="utf-8">
+   <link rel="stylesheet" href="style.css">
+   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+ </head>
+ <body>
+   <div class="center">
+     <input type="checkbox" id="show">
+     <label for="show" class="show-btn">View Form</label>
+     <div class="container">
+       <label for="show" class="close-btn fas fa-times" title="close"></label>
+       <div class="text">
+Login Form</div>
+<form action="#">
+         <div class="data">
+           <label>Email or Phone</label>
+           <input type="text" required>
+         </div>
+<div class="data">
+           <label>Password</label>
+           <input type="password" required>
+         </div>
+<div class="forgot-pass">
+<a href="#">Forgot Password?</a></div>
+<div class="btn">
+           <div class="inner">
+</div>
+<button type="submit">login</button>
+         </div>
+<div class="signup-link">
+Not a member? <a href="#">Sign up now!</a></div>
+</form>
+</div>
+</div>
+</body>
+</html> -->
+ 
+   <div class="form-popup" id="myForm">
+     <form action="/action_page.php" class="form-container">
+       <h1>Login</h1>
+  
+       <label for="email"><b>Email</b></label>
+       <input type="text" placeholder="Enter Email" name="email" required>
+  
+       <label for="psw"><b>Password</b></label>
+       <input type="password" placeholder="Enter Password" name="psw" required>
+  
+       <button type="submit" class="btn">Login</button>
+       <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+     </form>
+   </div>
+   <button class="signUp">Sign Up</button>
+</header>
+ 
+<div class="topnav">
+ <a class="active" href="#All">all</a>
+ <a href="#bathrooms">Bathrooms</a>
+ <a href="#microwaves">Microwaves</a>
+ <a href="#Water Stations">Water Stations</a>
+</div>
+ <div class="map">
+ 
+</div>
+ 
+ <div class="addButton">
+   <button class="addButton">+</button>
+</div>
 </body>
 </html>
