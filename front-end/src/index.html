@@ -38,6 +38,17 @@
     zoomOffset: -1,
     accessToken: 'pk.eyJ1IjoiYXNobGV5eXVuZyIsImEiOiJja3c4Zms5b3VmbmdpMm9wZ3RweXVobXdrIn0.Z0suqthB4PY9EuGvYQHv6w'
 }).addTo(mymap);
+  newMarkerGroup = new L.LayerGroup();
+  mymap.on('click', addMarker);
+
+
+function addMarker(e){
+    // Add marker to map at click location; add popup window
+    var newMarker = new L.marker(e.latlng).addTo(mymap);
+    newMarker.on('click', function(e) {
+      console.log("marker clicked", e);
+    });
+}
   </script>
 </body>
 </html>
